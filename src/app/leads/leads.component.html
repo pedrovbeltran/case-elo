@@ -1,0 +1,45 @@
+<app-topbar>Painel de Leads</app-topbar>
+<div class="container mt-3">
+  <a class="btn btn-primary mb-3" [routerLink]="['/newlead']" role="button"
+    >Novo Lead (+)</a
+  >
+  <div *ngIf="success" class="alert alert-success" role="alert">
+    Novo Lead Cadastrado com sucesso!
+  </div>
+  <div *ngIf="dragNotAllowed" class="alert alert-danger" role="alert">
+    Operação não permitida, tente arrastar os itens novamente
+  </div>
+  <table class="table table-secondary table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Cliente em potencial</th>
+        <th scope="col">Dados confirmados</th>
+        <th scope="col">Reunião Agendada</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+        (cdkDropListDropped)="drop($event)"
+        *ngFor="let lead of leads; let i = index"
+      >
+        <td [cdkDragData]="i" cdkDrag>
+          <div *ngIf="lead.status == 0">
+            {{ lead.name }}
+          </div>
+        </td>
+        <td [cdkDragData]="i" cdkDrag>
+          <div *ngIf="lead.status == 1">
+            {{ lead.name }}
+          </div>
+        </td>
+        <td [cdkDragData]="i" cdkDrag>
+          <div *ngIf="lead.status == 2">
+            {{ lead.name }}
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

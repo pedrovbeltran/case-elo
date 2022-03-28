@@ -1,0 +1,77 @@
+<div class="div-center">
+  <div class="content">
+    <h3>Logo da EloGroup</h3>
+    <hr />
+    <div *ngIf="success" class="alert alert-success" role="alert">
+      Registro realizado com sucesso! Se não for redirecionado em
+      <cd-timer format="intelli" [countdown]="true" [startTime]="5"></cd-timer>
+      clique <a [routerLink]="['/leads']">aqui</a>
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="createNewUser()">
+      <div class="mb-3">
+        <label for="exampleInputUser" class="form-label">Usuário</label>
+        <input
+          required
+          type="text"
+          class="form-control"
+          id="exampleInputUser"
+          formControlName="user"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Senha</label>
+        <input
+          required
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          formControlName="password"
+          pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$"
+        />
+        <div
+          *ngIf="retControls.password.touched && retControls.password.invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="retControls.password.invalid">Senha inválida.</div>
+        </div>
+        <div id="passwordHelpBlock" class="form-text">
+          Sua senha deve possuir ao menos 8 caracteres, contendo ao menos, um
+          caracter especial, um caracter numérico, um caracter alfanumérico;
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword2" class="form-label"
+          >Confirmação de Senha</label
+        >
+        <input
+          required
+          type="password"
+          class="form-control"
+          id="exampleInputPassword2"
+          formControlName="confirmPassword"
+        />
+        <div
+          *ngIf="
+            retControls.confirmPassword.touched &&
+            retControls.confirmPassword.invalid
+          "
+          class="alert alert-danger"
+        >
+          <div *ngIf="retControls.confirmPassword.errors.required">
+            Campo obrigatório.
+          </div>
+          <div *ngIf="retControls.confirmPassword.errors.mustMatch">
+            Senha e confirmação devem ser iguais!
+          </div>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!registerForm.valid"
+      >
+        Registrar
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<app-topbar> Novo Lead </app-topbar>
+<div class="container mt-5">
+  <form [formGroup]="leadForm" (ngSubmit)="createNewLead()" class="row g-3">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="exampleInputName1" class="form-label">Nome</label>
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputName1"
+          formControlName="name"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPhone1" class="form-label">Telefone</label>
+        <input
+          type="tel"
+          class="form-control"
+          id="exampleInputPhone1"
+          formControlName="phone"
+          required
+        />
+        <!--pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,}$"-->
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">E-mail</label>
+        <input
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          formControlName="email"
+          pattern="^[^ ]+@[^ ]+\.[a-z]{2,3}$"
+          required
+        />
+        <div
+          *ngIf="retControls.email.touched && retControls.email.invalid"
+          class="alert alert-danger"
+        >
+          <div *ngIf="retControls.email.invalid">Insira um e-mail válido.</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <label for="checkboxes" class="form-label">Oportunidades</label>
+      <table class="table table-secondary table-bordered" id="checkboxes">
+        <thead>
+          <tr class="table-active">
+            <th scope="col">
+              <div>
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  (change)="toggleCheckboxAll($event)"
+                />
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            formArrayName="table"
+            *ngFor="let checkbox of checkboxes; let i = index"
+          >
+            <div>
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [value]="checkbox.label"
+                [checked]="checkbox.selected"
+                (change)="onCheckChange($event)"
+              />
+            </div>
+            <td>{{ checkbox.label }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="d-grid gap-2">
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="!leadForm.valid"
+        >
+          Salvar
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
