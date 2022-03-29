@@ -1,3 +1,8 @@
-# angular-ivy-ycd2rr
+# Case Elo
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/angular-ivy-ycd2rr)
+## Passo a passo para rodar o programa:
+
+### 1 - npm install
+### 2 - npm start OU ng server
+
+[Deploy on StackBlitz ⚡️](https://stackblitz.com/edit/angular-ivy-ycd2rr)
